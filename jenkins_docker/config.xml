@@ -1,0 +1,25 @@
+<?xml version='1.1' encoding='UTF-8'?> <flow-definition plugin="workflow-job@latest"> <actions>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@latest"/>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@latest">
+      <jobProperties/> <triggers/> <parameters/> <options/> </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
+  </actions> <description></description> <keepDependencies>false</keepDependencies> <properties>
+    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@latest"> <projectUrl>https://github.com/MartinsLivca/jenkins_task/</projectUrl>
+      <displayName></displayName>
+    </com.coravy.hudson.plugins.github.GithubProjectProperty> <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty> <triggers>
+        <org.jenkinsci.plugins.gwt.GenericTrigger plugin="generic-webhook-trigger@latest">
+          <spec></spec> <genericVariables> <org.jenkinsci.plugins.gwt.GenericVariable> <expressionType>JSONPath</expressionType> <key>IF_MERGED</key>
+              <value>pull_request.merged</value> <regexpFilter></regexpFilter> <defaultValue></defaultValue>
+            </org.jenkinsci.plugins.gwt.GenericVariable> </genericVariables> <regexpFilterText>$IF_MERGED</regexpFilterText>
+          <regexpFilterExpression>true</regexpFilterExpression> <printPostContent>false</printPostContent>
+          <printContributedVariables>false</printContributedVariables> <causeString>Generic Cause</causeString> <token>jenkinstask</token>
+          <tokenCredentialId></tokenCredentialId> <silentResponse>false</silentResponse> <overrideQuietPeriod>false</overrideQuietPeriod>
+        </org.jenkinsci.plugins.gwt.GenericTrigger> </triggers> </org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty> </properties>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition" plugin="workflow-cps@latest">
+    <scm class="hudson.plugins.git.GitSCM" plugin="git@latest"> <configVersion>2</configVersion> <userRemoteConfigs> <hudson.plugins.git.UserRemoteConfig>
+          <url>https://github.com/MartinsLivca/jenkins_task</url> <credentialsId>github_credentials</credentialsId>
+        </hudson.plugins.git.UserRemoteConfig> </userRemoteConfigs> <branches> <hudson.plugins.git.BranchSpec> <name>*/main</name>
+        </hudson.plugins.git.BranchSpec>
+      </branches> <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations> <submoduleCfg class="empty-list"/> <extensions/> </scm>
+    <scriptPath>Jenkinsfile</scriptPath> <lightweight>false</lightweight>
+  </definition> <triggers/> <disabled>false</disabled>
+</flow-definition>
